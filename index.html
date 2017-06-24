@@ -166,7 +166,7 @@ margin-top:200px;
 		
 		socket.on('chat message', function(msg){
 			if(msg!='' && msg!=' '){
-				$('#messages').append($('<li class="a">').text(msg));
+				$('#messages').append($('<li class="'+msg[msg.length-1]+'">').text(msg));
 				$("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
 			}
 		});
