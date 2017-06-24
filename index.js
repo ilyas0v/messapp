@@ -6,6 +6,11 @@ app.get('/', function(req, res){
   res.sendfile('index.html');
 });
 
+/*
+app.post('/login', function(request, response){
+    console.log(request.body.username); 
+    console.log(request.body.pass);
+});*/
 
 
 io.on('connection', function(socket){
