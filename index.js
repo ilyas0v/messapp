@@ -7,14 +7,13 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-  socket.on('chat message', function(msg){
-    console.log('message: ' + msg);
-    io.emit('chat message', msg);
-  });
+	socket.on('chat message', function(msg){
+		io.emit('chat message', msg);
+	});
 });
 
 var port = process.env.PORT || 3000;
 
 http.listen(port, function(){
-  console.log('listening...');
+	console.log('listening...');
 });
