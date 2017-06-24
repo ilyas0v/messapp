@@ -155,16 +155,10 @@ margin-top:200px;
 			  $('.text textarea').val('');
 			  return false;		
 		});
-		var GR = 0;
-		var AR = 0;
+
 		$('#kont .text textarea').keypress(function(e){
 			if(e.which == 13 && !e.shiftKey){
-			  socket.emit('chat message', $('.text textarea').val());
-			  var mesaj = $('.text textarea').val();
-			  if(mesaj.includes(":D") || mesaj.includes(":)")) GR++;
-			  else if(GR!=0) GR--;
-			  else if(mesaj.includes(":(") || mesaj.includes(":/")) AR++;
-			  else if(AR!=0) AR--;
+			  socket.emit('chat message', $('.text textarea').val()); 
 			  $('.text textarea').val('');
 			  return false;
 			}
@@ -173,12 +167,11 @@ margin-top:200px;
 		socket.on('chat message', function(msg){
 			if(msg!='' && msg!=' '){
 				$('#messages').append($('<li class="'+msg[msg.length-1]+'">').text(msg));
-				if(GR>10){$('#messages').append($('<li style="background:yellow;padding:10px;">').text("Allah sizi guldursun :D")); GR=0; }
-				else if(AR>10){$('#messages').append($('<li style="background:red;color:white;list-style-type:none;padding:15px;">').text("Nolub ne aglasmadi?!!!!")); AR=0; }
 				$("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
 			}
 		});
-	
+		
+			
 	});
 	
 	
