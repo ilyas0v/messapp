@@ -141,6 +141,7 @@ margin-top:200px;
 	
 	
 	
+	<div id="ses"></div>
 	
     <script src="/socket.io/socket.io.js"></script>
     <script
@@ -167,6 +168,7 @@ margin-top:200px;
 		socket.on('chat message', function(msg){
 			if(msg!='' && msg!=' '){
 				$('#messages').append($('<li class="'+msg[msg.length-1]+'">').text(msg));
+				document.getElementById("ses").innerHTML='<audio autoplay="autoplay"><source src="https://notificationsounds.com/message-tones/just-like-that-404/download/mp3" type="audio/mpeg" /><source src="https://notificationsounds.com/message-tones/just-like-that-404/download/mp3" /></audio>';
 				$("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
 			}
 		});
