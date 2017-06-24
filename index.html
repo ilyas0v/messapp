@@ -150,7 +150,12 @@ margin-top:200px;
     <script>
     var socket = io();
 	$(document).ready(function(){
-	
+		$('.send').click(function(){
+			  socket.emit('chat message', $('.text textarea').val());
+			  $('.text textarea').val('');
+			  return false;		
+		});
+		
 		$('#kont .text textarea').keypress(function(e){
 			if(e.which == 13 && !e.shiftKey){
 			  socket.emit('chat message', $('.text textarea').val());
