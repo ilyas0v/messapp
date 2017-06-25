@@ -165,12 +165,12 @@ margin-top:200px;
 }
 
 .saat{
-	margin-left:15px;
-	color:grey;
-	bottom:0px;
-	right:0px;
-	font-size:10px;
-}
+ 	margin-left:15px;
+ 	color:grey;
+ 	bottom:0px;
+ 	right:0px;
+ 	font-size:10px;
+ }
     </style>
   </head>
   <body>
@@ -206,13 +206,12 @@ margin-top:200px;
     <script>
     var socket = io();
 	
-	
 	function addZero(i) {
-		if (i < 10) {
-			i = "0" + i;
-		}
-		return i;
-	}
+ 		if (i < 10) {
+ 			i = "0" + i;
+ 		}
+ 		return i;
+ 	}
 	
 	
 	$(document).ready(function(){
@@ -227,8 +226,8 @@ margin-top:200px;
 					var klass = data[d].gonderen;
 					if(klass!='a' && klass!='b') klass='c';
 					var tarix = new Date(data[d].tarix);
-					var saat = addZero(tarix.getHours())+":"+addZero(tarix.getMinutes());
-					$('#messages').append('<li class="'+klass+'">'+(data[d].mesaj)+'<span class="saat">'+saat+'</span></li>');
+ 					var saat = addZero(tarix.getHours())+":"+addZero(tarix.getMinutes());
+ 					$('#messages').append('<li class="'+klass+'">'+(data[d].mesaj)+'<span class="saat">'+saat+'</span></li>');
 				}
 				$("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
 			}
@@ -260,8 +259,8 @@ margin-top:200px;
 				else 
 					var klass="c";
 				var tarix = new Date();
-				var saat = addZero(tarix.getHours()) + ":" + addZero(tarix.getMinutes());
-				$('#messages').append('<li class="'+klass+'">'+(msg)+'<span class="saat">'+saat+'</span></li>');
+ 				var saat = addZero(tarix.getHours()) + ":" + addZero(tarix.getMinutes());
+ 				$('#messages').append('<li class="'+klass+'">'+(msg)+'<span class="saat">'+saat+'</span></li>');
 				document.getElementById("ses").innerHTML='<audio autoplay="autoplay"><source src="https://notificationsounds.com/message-tones/just-like-that-404/download/mp3" type="audio/mpeg" /><source src="https://notificationsounds.com/message-tones/just-like-that-404/download/mp3" /></audio>';
 				$("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
 			}
