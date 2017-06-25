@@ -222,12 +222,20 @@ margin-top:200px;
 			url: "/m",
 			success: function(data){
 				console.log(data);
-				for(d in data){
-					var klass = data[d].gonderen;
+				var datasayi = data.length;
+				for(var i=datasayi-18;i<datasayi;i++){
+					var klass = data[i].gonderen;
 					if(klass!='a' && klass!='b') klass='c';
-					var tarix = new Date(data[d].tarix);
+					var tarix = new Date(data[i].tarix);
  					var saat = addZero(tarix.getHours())+":"+addZero(tarix.getMinutes());
- 					$('#messages').append('<li class="'+klass+'">'+(data[d].mesaj)+'<span class="saat">'+saat+'</span></li>');
+ 					$('#messages').append('<li class="'+klass+'">'+(data[i].mesaj)+'<span class="saat">'+saat+'</span></li>');				
+				}
+				for(var i=0;i<datasayi-18;i++){
+					var klass = data[i].gonderen;
+					if(klass!='a' && klass!='b') klass='c';
+					var tarix = new Date(data[i].tarix);
+ 					var saat = addZero(tarix.getHours())+":"+addZero(tarix.getMinutes());
+ 					$('#messages').append('<li class="'+klass+'">'+(data[i].mesaj)+'<span class="saat">'+saat+'</span></li>');
 				}
 				$("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
 			}
