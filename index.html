@@ -103,10 +103,10 @@ margin-top:200px;
   left:-30px;
   border-radius :0 20px 20px 20px;
   padding : 10px;
-  background :  #29a329;
+  background :  #bae0ba;
   color:white;
   font-family:sans-serif;
-  box-shadow : 0 2px 5px grey;
+  box-shadow : 0 2px 5px #c1aaaa;
 }
 
 
@@ -234,25 +234,7 @@ margin-top:200px;
 			}
 		});
 		
-		$('.smile').click(function(){
-			$.ajax({
-			'type' : 'GET',
-			url: "/m",
-			success: function(data){
-				console.log(data);
-				for(d in data){
-					var klass = data[d].gonderen;
-					if(klass!='a' && klass!='b') klass='c';
-					$('#messages').append('<li class="'+klass+'">'+(data[d].mesaj)+'</li>');
-					$("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
-				}
-			}
-			});
-		});
-		
-		
-		
-		
+	
 		$("#kont").draggable();
 	
 		$('.send').click(function(){
@@ -287,10 +269,6 @@ margin-top:200px;
 		
 			
 	});
-	
-	
-     
-	
 	
   </script>
   </body>
