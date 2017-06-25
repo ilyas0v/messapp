@@ -40,7 +40,7 @@ io.on('connection', function(socket){
 		if(msg!='' && msg!=' '){
 		MongoClient.connect(url, function(err, db) {
 			if (err) throw err;
-			var myobj = { gonderen: msg[msg.length-1], mesaj: msg };
+			var myobj = { gonderen: msg[msg.length-1], mesaj: msg , tarix : new Date()};
 			db.collection("mesajlar").insertOne(myobj, function(err, res) {
 				if (err) throw err;
 				console.log("1 record inserted");

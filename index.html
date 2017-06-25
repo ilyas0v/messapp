@@ -163,6 +163,14 @@ margin-top:200px;
 .smile{
 	cursor:pointer;
 }
+
+.saat{
+	margin-left:15px;
+	color:grey;
+	bottom:0px;
+	right:0px;
+	font-size:10px;
+}
     </style>
   </head>
   <body>
@@ -197,6 +205,16 @@ margin-top:200px;
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
     var socket = io();
+	
+	
+	function addZero(i) {
+		if (i < 10) {
+			i = "0" + i;
+		}
+		return i;
+	}
+	
+	
 	$(document).ready(function(){
 		
 		
@@ -208,7 +226,9 @@ margin-top:200px;
 				for(d in data){
 					var klass = data[d].gonderen;
 					if(klass!='a' && klass!='b') klass='c';
-					$('#messages').append('<li class="'+klass+'">'+(data[d].mesaj)+'</li>');
+					var tarix = new Date(data[d].tarix);
+					var saat = addZero(tarix.getHours())+":"+addZero(tarix.getMinutes());
+					$('#messages').append('<li class="'+klass+'">'+(data[d].mesaj)+'<span class="saat">'+saat+'</span></li>');
 				}
 				$("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
 			}
@@ -257,7 +277,9 @@ margin-top:200px;
 					var klass="b";
 				else 
 					var klass="c";
-				$('#messages').append($('<li class="'+klass+'">').text(msg));
+				var tarix = new Date();
+				var saat = addZero(tarix.getHours()) + ":" + addZero(tarix.getMinutes());
+				$('#messages').append('<li class="'+klass+'">'+(msg)+'<span class="saat">'+saat+'</span></li>');
 				document.getElementById("ses").innerHTML='<audio autoplay="autoplay"><source src="https://notificationsounds.com/message-tones/just-like-that-404/download/mp3" type="audio/mpeg" /><source src="https://notificationsounds.com/message-tones/just-like-that-404/download/mp3" /></audio>';
 				$("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
 			}
