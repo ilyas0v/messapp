@@ -159,6 +159,10 @@ margin-top:200px;
 	background :#e6e6e6 ;
 	display:inline-block;
 }
+
+.smile{
+	cursor:pointer;
+}
     </style>
   </head>
   <body>
@@ -208,6 +212,22 @@ margin-top:200px;
 					$("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
 				}
 			}
+		});
+		
+		$('.smile').click(function(){
+			$.ajax({
+			'type' : 'GET',
+			url: "/m",
+			success: function(data){
+				console.log(data);
+				for(d in data){
+					var klass = data[d].gonderen;
+					if(klass!='a' && klass!='b') klass='c';
+					$('#messages').append('<li class="'+klass+'">'+(data[d].mesaj)+'</li>');
+					$("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
+				}
+			}
+			});
 		});
 		
 		
