@@ -18,6 +18,8 @@
   "homepage": "https://github.com/TheLastCodeBenders/socketio-chat-example#readme",
   "dependencies": {
     "express": "^4.15.3",
+    "mongodb": "^2.2.29",
+    "mongoose": "^4.11.0",
     "socket.io": "^1.7.4"
   }
 }

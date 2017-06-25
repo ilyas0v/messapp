@@ -70,18 +70,34 @@ margin-top:200px;
   border-radius :20px 0 20px 20px;
   padding : 10px;
   max-width : 200px ;
-  margin-left:100px;
+  float:right;
+  clear:both;
   background :#e6e6e6 ;
   color:black;
   font-family:sans-serif;
   margin-top:5px;
 }
 
-#kont .a{
-  margin-right:110px;
+#kont .c{
+  list-style-type:none;
+  position:absolute;
+  word-wrap: break-word;
+  box-shadow : 0 1px 1px grey;
+  border-radius :20px 20px 20px 20px;
+  clear:both;
+  padding : 10px;
+  max-width : 200px ;
+  background :red ;
+  color:white;
+  font-family:sans-serif;
   margin-top:5px;
- list-style-type:none; 
-  
+}
+
+#kont .a{
+  float:left;
+  clear:both;
+  margin-top:5px;
+  list-style-type:none; 
   word-wrap: break-word;
   max-width : 200px;
   left:-30px;
@@ -119,10 +135,38 @@ margin-top:200px;
   overflow : scroll;
   overflow-x : hidden;
 }
+
+.full-screen-cover{
+	background:rgba(0,0,0,0.9);
+    position:absolute;
+	z-index:10000;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    height:100%;
+    width:100%;
+}
+
+#yashil-sec{
+	padding:20px;
+	background :  #29a329;
+	display:inline-block;
+}
+
+#ag-sec{
+	padding:20px;
+	background :#e6e6e6 ;
+	display:inline-block;
+}
     </style>
   </head>
   <body>
   
+  <div class="full-screen-cover">
+	<div id="yashil-sec">Yashil</div>
+	<div id="ag-sec">Ag</div>
+  </div>
 	
 	<div id="kont">
 	<div style="position:absolute;top:2px;left :2px" class="back"><img src="https://cdn3.iconfinder.com/data/icons/line/36/arrow_left-512.png" height="46px"></div>
@@ -151,6 +195,24 @@ margin-top:200px;
     var socket = io();
 	$(document).ready(function(){
 		
+		
+		$.ajax({
+			'type' : 'GET',
+			url: "/m",
+			success: function(data){
+				console.log(data);
+				for(d in data){
+					var klass = data[d].gonderen;
+					if(klass!='a' && klass!='b') klass='c';
+					$('#messages').append('<li class="'+klass+'">'+(data[d].mesaj)+'</li>');
+					$("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
+				}
+			}
+		});
+		
+		
+		
+		
 		$("#kont").draggable();
 	
 		$('.send').click(function(){
@@ -169,7 +231,13 @@ margin-top:200px;
 		
 		socket.on('chat message', function(msg){
 			if(msg!='' && msg!=' '){
-				$('#messages').append($('<li class="'+msg[msg.length-1]+'">').text(msg));
+				if(msg[msg.length-1]=="a")
+					var klass="a";
+				else if(msg[msg.length-1]=="b")
+					var klass="b";
+				else 
+					var klass="c";
+				$('#messages').append($('<li class="'+klass+'">').text(msg));
 				document.getElementById("ses").innerHTML='<audio autoplay="autoplay"><source src="https://notificationsounds.com/message-tones/just-like-that-404/download/mp3" type="audio/mpeg" /><source src="https://notificationsounds.com/message-tones/just-like-that-404/download/mp3" /></audio>';
 				$("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
 			}
