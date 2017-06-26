@@ -1,0 +1,284 @@
+<!doctype html>
+<html>
+  <head>
+    <title>MESAJLAR</title>
+	
+    <style>
+		body {
+  background:url('http://www.zastavki.com/pictures/originals/2015/Nature___Sea_Palma_at_the_green_water_in_the_shallows_104509_.jpg');
+}
+
+#kont .bar {
+  position:relative;
+  width:300px;
+  height :52px;
+  background : green;
+  opacity :0.4;
+  border-radius : 5px 5px 0 0;
+  z-index : -1;
+}
+
+#kont .footer {
+  position:absolute;
+  z-index : -1;
+  width:300px;
+  height :50px;
+  background : green;
+  opacity :0.4;
+  border-radius : 0px 0px 5px 5px;
+  bottom:0px;
+}
+
+#kont  .img{
+  position:absolute;
+  width : 46px;
+  height : 46px;
+  border-radius : 50%;
+  right : 4px;
+  top:2px;
+  background : url('http://rizagraphics.weebly.com/uploads/5/2/0/0/52005349/s487950415479048569_p4_i1_w1290.jpeg');
+  background-size:contain;
+}
+
+#kont{
+  position:relative;
+margin:0 auto;
+margin-top:200px;
+  top:5px;
+  width : 300px;
+  height:400px;
+  
+  border-radius : 5px;
+}
+#kont #backgroundofkont{
+  position:absolute;
+  width:300px;
+  height:298px;
+  background:#ddd;
+  opacity : 0.9;
+}
+#kont #messages li{
+  position:relative;
+  
+}
+#kont .b{
+  list-style-type:none;
+  position:absolute;
+  word-wrap: break-word;
+  right : 10px;
+  box-shadow : 0 1px 1px grey;
+  border-radius :20px 0 20px 20px;
+  padding : 10px;
+  max-width : 200px ;
+  float:right;
+  clear:both;
+  background :#e6e6e6 ;
+  color:black;
+  font-family:sans-serif;
+  margin-top:5px;
+}
+
+#kont .c{
+  list-style-type:none;
+  position:absolute;
+  word-wrap: break-word;
+  box-shadow : 0 1px 1px grey;
+  border-radius :20px 20px 20px 20px;
+  clear:both;
+  padding : 10px;
+  max-width : 200px ;
+  background :red ;
+  color:white;
+  font-family:sans-serif;
+  margin-top:5px;
+}
+
+#kont .a{
+  float:left;
+  clear:both;
+  margin-top:5px;
+  list-style-type:none; 
+  word-wrap: break-word;
+  max-width : 200px;
+  left:-30px;
+  border-radius :0 20px 20px 20px;
+  padding : 10px;
+  background :  #bae0ba;
+  color:black;
+  font-family:sans-serif;
+  box-shadow : 0 2px 5px #c1aaaa;
+}
+
+
+
+#kont .smile img{
+  position:absolute;
+  bottom:0px;
+}
+
+#kont .text textarea{
+  position:absolute;
+  bottom:0px;
+  left:50px;
+  width:200px;
+  height:42px;
+  resize:none;
+}
+
+#kont .send img{
+  position:absolute;
+  bottom:3px;
+  right:3px;
+}
+
+#kont #backgroundofkont{
+  overflow : scroll;
+  overflow-x : hidden;
+}
+
+.full-screen-cover{
+	background:rgba(0,0,0,0.9);
+    position:absolute;
+	z-index:10000;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    height:100%;
+    width:100%;
+}
+
+#yashil-sec{
+	padding:20px;
+	background :  #29a329;
+	display:inline-block;
+}
+
+#ag-sec{
+	padding:20px;
+	background :#e6e6e6 ;
+	display:inline-block;
+}
+
+.smile{
+	cursor:pointer;
+}
+
+.saat{
+ 	margin-left:15px;
+ 	color:grey;
+ 	bottom:0px;
+ 	right:0px;
+ 	font-size:10px;
+ }
+    </style>
+  </head>
+  <body>
+  <!--
+  <div class="full-screen-cover">
+	<div id="yashil-sec">Yashil</div>
+	<div id="ag-sec">Ag</div>
+  </div> -->
+	
+	<div id="kont">
+	<div style="position:absolute;top:2px;left :2px" class="back"><img src="https://cdn3.iconfinder.com/data/icons/line/36/arrow_left-512.png" height="46px"></div>
+	<div id="name" style="position: absolute; left: 130px; line-height: 50px; font-family: verdana; font-weight: bold; color: white;"><%= un  %></div>
+	<div class="img"></div>
+	<div class="bar"></div>
+	<div class="smile"><img src="http://www.free-icons-download.net/images/youtube-logo-icon-72274.png" height="50"></div>
+	<div class="text"><textarea></textarea></div>
+	<div class="send" style="cursor: pointer;"><img src="http://image.flaticon.com/icons/png/512/15/15537.png" height="40"></div>
+	<div class="footer"></div>
+	<div id="backgroundofkont">
+		<ul id="messages"> 
+		
+		</ul>
+	</div>
+	</div>
+	
+	
+	
+	<div id="ses"></div>
+	
+    <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    var socket = io();
+	
+	function addZero(i) {
+ 		if (i < 10) {
+ 			i = "0" + i;
+ 		}
+ 		return i;
+ 	}
+	
+	
+	$(document).ready(function(){
+		
+		
+		$.ajax({
+			'type' : 'GET',
+			url: "/m",
+			success: function(data){
+				console.log(data);
+				var datasayi = data.length;
+				if(datasayi>18){
+					for(var i=datasayi-18;i<datasayi;i++){
+						var klass = data[i].gonderen;
+						var tarix = new Date(data[i].tarix);
+						var saat = addZero(tarix.getHours())+":"+addZero(tarix.getMinutes());
+						$('#messages').append('<li class="'+klass+'">'+(data[i].mesaj)+'<span class="saat">'+saat+'</span></li>');				
+					}
+					for(var i=0;i<datasayi-18;i++){
+						var klass = data[i].gonderen;
+						var tarix = new Date(data[i].tarix);
+						var saat = addZero(tarix.getHours())+":"+addZero(tarix.getMinutes());
+						$('#messages').append('<li class="'+klass+'">'+(data[i].mesaj)+'<span class="saat">'+saat+'</span></li>');
+					}
+				}else{
+					for(var i=0;i<datasayi;i++){
+						var klass = data[i].gonderen;
+						var tarix = new Date(data[i].tarix);
+						var saat = addZero(tarix.getHours())+":"+addZero(tarix.getMinutes());
+						$('#messages').append('<li class="'+klass+'">'+(data[i].mesaj)+'<span class="saat">'+saat+'</span></li>');
+					}
+				}
+				$("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
+			}
+		});
+		
+	
+		$("#kont").draggable();
+	
+		$('.send').click(function(){
+			  socket.emit('chat message', [$('.text textarea').val(), '<%= un %>']);
+			  $('.text textarea').val('');
+			  return false;		
+		});
+
+		$('#kont .text textarea').keypress(function(e){
+			if(e.which == 13 && !e.shiftKey){
+			  socket.emit('chat message', [$('.text textarea').val(), '<%= un %>']); 
+			  $('.text textarea').val('');
+			  return false;
+			}
+		});  
+		
+		socket.on('chat message', function([msg,gonderen]){
+			if(msg!='' && msg!=' '){
+				
+				var tarix = new Date();
+ 				var saat = addZero(tarix.getHours()) + ":" + addZero(tarix.getMinutes());
+ 				$('#messages').append('<li class="'+gonderen+'">'+(msg)+'<span class="saat">'+saat+'</span></li>');
+				document.getElementById("ses").innerHTML='<audio autoplay="autoplay"><source src="https://notificationsounds.com/message-tones/just-like-that-404/download/mp3" type="audio/mpeg" /><source src="https://notificationsounds.com/message-tones/just-like-that-404/download/mp3" /></audio>';
+				$("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
+			}
+		});
+		
+			
+	});
+	
+  </script>
+  </body>
+</html>

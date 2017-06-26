@@ -8,16 +8,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TheLastCodeBenders/socketio-chat-example.git"
+    "url": "git+https://github.com/ilyas0v/messapp.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TheLastCodeBenders/socketio-chat-example/issues"
+    "url": "https://github.com/ilyas0v/messapp/issues"
   },
-  "homepage": "https://github.com/TheLastCodeBenders/socketio-chat-example#readme",
+  "homepage": "https://github.com/ilyas0v/messapp",
   "dependencies": {
+	"ejs": "^1.0.0",
     "body-parser": "^1.17.2",
+    "client-sessions": "^0.8.0",
     "express": "^4.15.3",
     "mongodb": "^2.2.29",
     "mongoose": "^4.11.0",

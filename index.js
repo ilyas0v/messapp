@@ -10,8 +10,11 @@ var url = "mongodb://ilyas0v:54123ii@ds137882.mlab.com:37882/messapp";
 
 
 
+app.set('view engine', 'ejs');   // View engine olaraq  ejs  ishledecik..
+
 app.get('/', function(req, res){
-  res.sendfile('login.html');
+	res.render('pages/login');
+	//res.sendfile('login.html');
 });
 
 
@@ -31,7 +34,7 @@ app.post("/", function(request, response) {
 	  db.collection("istifadeciler").find(query).toArray(function(err, result) {
 		if (err) throw err;
 		console.log(result);
-		if(result.length!=0){response.sendfile('index.html'); }
+		if(result.length!=0){response.render('pages/index',{un}); }
 		else{response.end('Girish melumatlari yanlishdir..');}
 		db.close();
 	  });
@@ -60,11 +63,11 @@ app.get('/m',function(req,res){
 
 
 io.on('connection', function(socket){
-	socket.on('chat message', function(msg){
+	socket.on('chat message', function([msg,gonderen]){
 		if(msg!='' && msg!=' '){
 		MongoClient.connect(url, function(err, db) {
 			if (err) throw err;
-			var myobj = { gonderen: msg[msg.length-1], mesaj: msg , tarix : new Date()};
+			var myobj = { gonderen: gonderen, mesaj: msg , tarix : new Date()};
 			db.collection("mesajlar").insertOne(myobj, function(err, res) {
 				if (err) throw err;
 				console.log("1 record inserted");
@@ -74,7 +77,7 @@ io.on('connection', function(socket){
 		
 		}
 		
-		io.emit('chat message', msg);
+		io.emit('chat message', [msg,gonderen]);
 	});
 });
 
