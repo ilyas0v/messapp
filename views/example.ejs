@@ -1,0 +1,12 @@
+<ul class="timeline">
+    <% masinlar.forEach(function(masin) { %>
+    <li class="timeline-yellow">
+        <div class="timeline-time">
+            <span class="date" style="text-align:left">
+            <%= report.bashliq %> </span>
+            <span class="time" style="font-weight:700;font-size:25px;line-height:20px;text-align:left;">
+            <%= report.created_at %> </span>
+        </div>
+    </li>
+    <% }) %>
+</ul>

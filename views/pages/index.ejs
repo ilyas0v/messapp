@@ -171,29 +171,70 @@ margin-top:200px;
  	right:0px;
  	font-size:10px;
  }
+ 
+ 
+  #backgroundofkont::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+#backgroundofkont::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+#backgroundofkont::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	background-color: #FFF;
+	background-image: -webkit-gradient(linear,
+									   40% 0%,
+									   75% 84%,
+									   from(#4D9C41),
+									   to(#19911D),
+									   color-stop(.6,#54DE5D))
+}
     </style>
   </head>
   <body>
-  <!--
-  <div class="full-screen-cover">
-	<div id="yashil-sec">Yashil</div>
-	<div id="ag-sec">Ag</div>
-  </div> -->
-	
+
 	<div id="kont">
-	<div style="position:absolute;top:2px;left :2px" class="back"><img src="https://cdn3.iconfinder.com/data/icons/line/36/arrow_left-512.png" height="46px"></div>
-	<div id="name" style="position: absolute; left: 130px; line-height: 50px; font-family: verdana; font-weight: bold; color: white;"><%= un  %></div>
-	<div class="img"></div>
-	<div class="bar"></div>
-	<div class="smile"><img src="http://www.free-icons-download.net/images/youtube-logo-icon-72274.png" height="50"></div>
-	<div class="text"><textarea></textarea></div>
-	<div class="send" style="cursor: pointer;"><img src="http://image.flaticon.com/icons/png/512/15/15537.png" height="40"></div>
-	<div class="footer"></div>
-	<div id="backgroundofkont">
-		<ul id="messages"> 
+	
+	<div id="photo_upload_ederken" style="
+	transition: .5s width;
+    width: 0%;
+    background: rgba(195, 222, 191, 0.86);
+    height: 100%;
+    position: absolute;
+    z-index: 10;">
 		
-		</ul>
+			<div  style="display:none;margin:0 auto;margin-top:50px;padding:20px;background:rgba(0,0,0,0.7);border-radius:20px;">
+		<h1 style="color:white">Image upload</h1>
+		<form action="/upload" method="POST" enctype="multipart/form-data">
+			<input class="form-control" type="file" name="shekil"><br>
+			<a style="margin-top:20px;" href="">Yukle</a>
+		</form>
 	</div>
+		
+		
+	</div> 
+	
+		<div style="position:absolute;top:2px;left :2px;z-index:100;cursor:pointer;" class="back"><img src="https://cdn3.iconfinder.com/data/icons/line/36/arrow_left-512.png" height="46px"></div>
+		<div id="name" style="position: absolute; left: 130px; line-height: 50px; font-family: verdana; font-weight: bold; color: white;"><%= un  %></div>
+		<div class="img"></div>
+		<div class="bar"></div>
+		<div class="smile"><img style="margin-left:3px;" src="images/camera.png" height="45"></div>
+		<div class="text"><textarea></textarea></div>
+		<div class="send" style="cursor: pointer;"><img src="http://image.flaticon.com/icons/png/512/15/15537.png" height="40"></div>
+		<div class="footer"></div>
+		<div id="backgroundofkont">
+			<ul id="messages"> 
+
+			</ul>
+		</div>
 	</div>
 	
 	
@@ -216,38 +257,29 @@ margin-top:200px;
 	
 	$(document).ready(function(){
 		
+		$('.smile').click(function(){
+			$('#photo_upload_ederken').css({'width':'100%'});
+			$('#photo_upload_ederken div').fadeIn();
+		});
 		
+		$('.back').click(function(){
+			$('#photo_upload_ederken').css({'width':'0%'});
+			$('#photo_upload_ederken div').fadeOut();
+		});
 		$.ajax({
 			'type' : 'GET',
 			url: "/m",
 			success: function(data){
 				console.log(data);
 				var datasayi = data.length;
-				if(datasayi>18){
-					for(var i=datasayi-18;i<datasayi;i++){
-						var klass = data[i].gonderen;
-						var tarix = new Date(data[i].tarix);
-						var saat = addZero(tarix.getHours())+":"+addZero(tarix.getMinutes());
-						$('#messages').append('<li class="'+klass+'">'+(data[i].mesaj)+'<span class="saat">'+saat+'</span></li>');				
-					}
-					for(var i=0;i<datasayi-18;i++){
-						var klass = data[i].gonderen;
-						var tarix = new Date(data[i].tarix);
-						var saat = addZero(tarix.getHours())+":"+addZero(tarix.getMinutes());
-						$('#messages').append('<li class="'+klass+'">'+(data[i].mesaj)+'<span class="saat">'+saat+'</span></li>');
-					}
-				}else{
 					for(var i=0;i<datasayi;i++){
 						var klass = data[i].gonderen;
-						var tarix = new Date(data[i].tarix);
-						var saat = addZero(tarix.getHours())+":"+addZero(tarix.getMinutes());
-						$('#messages').append('<li class="'+klass+'">'+(data[i].mesaj)+'<span class="saat">'+saat+'</span></li>');
+						var tarix = data[i].tarix;
+						$('#messages').append('<li class="'+klass+'">'+(data[i].mesaj)+'<span class="saat">'+tarix+'</span></li>');
 					}
-				}
 				$("#kont #backgroundofkont").animate({ scrollTop: 10000 }, "slow");
 			}
 		});
-		
 	
 		$("#kont").draggable();
 	
